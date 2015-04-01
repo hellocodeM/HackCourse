@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name         hack the course
-// @namespace    https://github.com/HelloCodeMing/HackCourse
+// @name         网络公选课
+// @namespace    http://your.homepage/
 // @version      0.1
-// @description  hack the Soochow university network public course
-// @author       huanming wong
+// @description  enter something useful
+// @author       You
 // @match        http://kczx.suda.edu.cn/G2S/Learning/Learning.htm?*
 // @grant        none
 // ==/UserScript==
 
 $(document).ready(function() {
     jwplayer('div_play').onPlay(hackIt);
-    setTimeout(hackIt, 3 * 1000);
+    setTimeout(hackIt, 1 * 1000);
 });
 
 function hackIt() {
@@ -27,4 +27,21 @@ function hackIt() {
                 console.log('succeed');
             }
            });
+    // 资料
+    ShowTabs(2);
+    $('#dataList').children().each(function() {
+        var link = $(this).children().first();
+        $.ajax({ url: 'StudentLearning.ashx?action=GetG2SSetStageLearnPartStudentFiles&fPlanID=' +
+                link.attr("PlanID") +
+                '&fPartID=' +
+                link.attr("PartID") +
+                "&fFileIDS=" +
+                link.attr("kid"), 
+                cache: false, async: false,
+                success: function(data) {
+                    console.log('finish ' + link.attr('title'));
+                }
+               });
+    });
+    alert("本课已经完成，请刷新页面跳到下一课");
 }
