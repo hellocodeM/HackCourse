@@ -10,7 +10,7 @@
 
 $(document).ready(function() {
     jwplayer('div_play').onPlay(hackIt);
-    setTimeout(hackIt, 10 * 1000);
+    setTimeout(hackIt, 3 * 1000);
 });
 
 function hackIt() {
